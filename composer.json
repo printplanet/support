@@ -1,0 +1,34 @@
+{
+  "name": "printplanet/support",
+  "description": "The Printplanet Support package.",
+  "license": "MIT",
+  "homepage": "https://www.printplanet.de",
+  "support": {
+    "issues": "https://github.com/printplanet/framework/issues",
+    "source": "https://github.com/printplanet/framework"
+  },
+  "authors": [
+    {
+      "name": "Lutz Bicker",
+      "email": "bicker@printplanet.de"
+    }
+  ],
+  "require": {
+    "php": ">=5.3",
+    "ext-mbstring": "*"
+  },
+  "autoload": {
+    "psr-4": {
+      "Printplanet\\Component\\Support\\": ""
+    }
+  },
+  "extra": {
+    "branch-alias": {
+      "dev-master": "1.0-dev"
+    }
+  },
+  "config": {
+    "sort-packages": true
+  },
+  "minimum-stability": "dev"
+}
