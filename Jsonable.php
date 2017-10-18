@@ -1,6 +1,6 @@
 <?php
 
-namespace PP\Component\Support\Str;
+namespace Printplanet\Component\Support;
 
 /**
  * Interface Jsonable.

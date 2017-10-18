@@ -1,6 +1,6 @@
 <?php
 
-namespace PP\Component\Support;
+namespace Printplanet\Component\Support;
 
 /**
  * Class Str.

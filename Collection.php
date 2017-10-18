@@ -12,7 +12,7 @@
 // The above copyright notice and this permission notice shall be included in all copies or substantial portions
 // of the Software.
 
-namespace PP\Component\Support\Str;
+namespace Printplanet\Component\Support;
 
 use Countable;
 use Exception;
@@ -23,7 +23,6 @@ use CachingIterator;
 use JsonSerializable;
 use IteratorAggregate;
 use InvalidArgumentException;
-use PP\Component\Support\Arr;
 
 class Collection implements ArrayAccess, Arrayable, Countable, IteratorAggregate, Jsonable, JsonSerializable
 {
@@ -121,6 +120,7 @@ class Collection implements ArrayAccess, Arrayable, Countable, IteratorAggregate
             return null;
         }
 
+        /** @var Collection $values */
         $values = $this->with(isset($key) ? $this->pluck($key) : $this)->sort()->values();
         $middle = (int) ($count / 2);
 
