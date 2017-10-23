@@ -15,12 +15,16 @@
   ],
   "require": {
     "php": ">=5.3",
-    "ext-mbstring": "*"
+    "ext-mbstring": "*",
+    "symfony/var-dumper": "2.7.*"
   },
   "autoload": {
     "psr-4": {
       "Printplanet\\Component\\Support\\": ""
-    }
+    },
+    "files": [
+      "helpers.php"
+    ]
   },
   "extra": {
     "branch-alias": {

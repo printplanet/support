@@ -90,6 +90,7 @@ class Collection implements ArrayAccess, Arrayable, Countable, IteratorAggregate
         if ($count = $this->count()) {
             return $this->sum($callback) / $count;
         }
+        return null;
     }
 
     /**

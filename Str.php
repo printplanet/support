@@ -38,6 +38,176 @@ class Str
      */
     protected static $macros = array();
 
+
+    /**
+     * Return the remainder of a string after a given value.
+     *
+     * @param  string  $subject
+     * @param  string  $search
+     * @return string
+     */
+    public static function after($subject, $search)
+    {
+        if($search === '') {
+            return $subject;
+        }
+
+        $result = array_reverse(explode($search, $subject, 2));
+        return $result[0];
+    }
+
+    /**
+     * Get the portion of a string before a given value.
+     *
+     * @param  string  $subject
+     * @param  string  $search
+     * @return string
+     */
+    public static function before($subject, $search)
+    {
+        if($search === '') {
+            return $subject;
+        }
+
+        $result = explode($search, $subject);
+        return $result[0];
+    }
+
+    /**
+     * Cap a string with a single instance of a given value.
+     *
+     * @param  string  $value
+     * @param  string  $cap
+     * @return string
+     */
+    public static function finish($value, $cap)
+    {
+        $quoted = preg_quote($cap, '/');
+
+        return preg_replace('/(?:'.$quoted.')+$/u', '', $value).$cap;
+    }
+
+    /**
+     * Limit the number of characters in a string.
+     *
+     * @param  string  $value
+     * @param  int     $limit
+     * @param  string  $end
+     * @return string
+     */
+    public static function limit($value, $limit = 100, $end = '...')
+    {
+        if (mb_strwidth($value, 'UTF-8') <= $limit) {
+            return $value;
+        }
+
+        return rtrim(mb_strimwidth($value, 0, $limit, '', 'UTF-8')).$end;
+    }
+
+
+    /**
+     * Replace a given value in the string sequentially with an array.
+     *
+     * @param  string  $search
+     * @param  array   $replace
+     * @param  string  $subject
+     * @return string
+     */
+    public static function replaceArray($search, array $replace, $subject)
+    {
+        foreach ($replace as $value) {
+            $subject = static::replaceFirst($search, $value, $subject);
+        }
+
+        return $subject;
+    }
+
+    /**
+     * Replace the first occurrence of a given value in the string.
+     *
+     * @param  string  $search
+     * @param  string  $replace
+     * @param  string  $subject
+     * @return string
+     */
+    public static function replaceFirst($search, $replace, $subject)
+    {
+        if ($search == '') {
+            return $subject;
+        }
+
+        $position = strpos($subject, $search);
+
+        if ($position !== false) {
+            return substr_replace($subject, $replace, $position, strlen($search));
+        }
+
+        return $subject;
+    }
+
+    /**
+     * Replace the last occurrence of a given value in the string.
+     *
+     * @param  string  $search
+     * @param  string  $replace
+     * @param  string  $subject
+     * @return string
+     */
+    public static function replaceLast($search, $replace, $subject)
+    {
+        $position = strrpos($subject, $search);
+
+        if ($position !== false) {
+            return substr_replace($subject, $replace, $position, strlen($search));
+        }
+
+        return $subject;
+    }
+
+    /**
+     * Begin a string with a single instance of a given value.
+     *
+     * @param  string  $value
+     * @param  string  $prefix
+     * @return string
+     */
+    public static function start($value, $prefix)
+    {
+        $quoted = preg_quote($prefix, '/');
+
+        return $prefix.preg_replace('/^(?:'.$quoted.')+/u', '', $value);
+    }
+
+    /**
+     * Convert a value to studly caps case.
+     *
+     * @param  string  $value
+     * @return string
+     */
+    public static function studly($value)
+    {
+        $key = $value;
+
+        if (isset(static::$studlyCache[$key])) {
+            return static::$studlyCache[$key];
+        }
+
+        $value = ucwords(str_replace(array('-', '_'), ' ', $value));
+
+        return static::$studlyCache[$key] = str_replace(' ', '', $value);
+    }
+
+    /**
+     * Convert the given string to title case.
+     *
+     * @param  string  $value
+     * @return string
+     */
+    public static function title($value)
+    {
+        return mb_convert_case($value, MB_CASE_TITLE, 'UTF-8');
+    }
+
     /**
      * Get the class "basename" of the given object / class.
      *

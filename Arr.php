@@ -16,6 +16,23 @@ class Arr
 {
 
     /**
+     * Add an element to an array using "dot" notation if it doesn't exist.
+     *
+     * @param  array   $array
+     * @param  string  $key
+     * @param  mixed   $value
+     * @return array
+     */
+    public static function add($array, $key, $value)
+    {
+        if (is_null(static::get($array, $key))) {
+            static::set($array, $key, $value);
+        }
+
+        return $array;
+    }
+
+    /**
      * Get a value from the array, and remove it.
      *
      * @param  array   $array
@@ -1398,15 +1415,43 @@ class Arr
     }
 
     /**
-     * Liefert einen oder mehrere zufällige Einträge eines Arrays
-     * array_rand uses the libc generator, which is slower and less-random than Mersenne Twister.
+     * Get one or a specified number of random values from an array.
      *
-     * @param array $array
+     * @param  array  $array
+     * @param  int|null  $number
      * @return mixed
+     *
+     * @throws \InvalidArgumentException
      */
-    public static function random(array $array)
+    public static function random($array, $number = null)
     {
-        return $array[mt_rand(0, count($array) - 1)];
+        $requested = is_null($number) ? 1 : $number;
+
+        $count = count($array);
+
+        if ($requested > $count) {
+            throw new \InvalidArgumentException(
+                "You requested {$requested} items, but there are only {$count} items available."
+            );
+        }
+
+        if (is_null($number)) {
+            return $array[array_rand($array)];
+        }
+
+        if ((int) $number === 0) {
+            return array();
+        }
+
+        $keys = array_rand($array, $number);
+
+        $results = array();
+
+        foreach ((array) $keys as $key) {
+            $results[] = $array[$key];
+        }
+
+        return $results;
     }
 
     /**
