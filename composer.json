@@ -16,7 +16,8 @@
   "require": {
     "php": ">=5.3",
     "ext-mbstring": "*",
-    "symfony/var-dumper": "2.7.*"
+    "symfony/var-dumper": "2.7.*",
+    "printplanet/container": "1.*"
   },
   "autoload": {
     "psr-4": {
