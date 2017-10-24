@@ -948,3 +948,26 @@ if (! function_exists('with')) {
         return is_null($callback) ? $value : $callback($value);
     }
 }
+
+
+if (version_compare(PHP_VERSION, '5.4', '<')) {
+    /**
+     * JsonSerializable interface. This file provides backwards compatibility to PHP 5.3 and ensures
+     * the interface is present in systems where JSON related code was removed.
+     *
+     * @link http://php.net/manual/en/class.jsonserializable.php
+     */
+    interface JsonSerializable
+    {
+
+        /**
+         * Specify data which should be serialized to JSON
+         * @link http://php.net/manual/en/jsonserializable.jsonserialize.php
+         * @return mixed data which can be serialized by <b>json_encode</b>,
+         * which is a value of any type other than a resource.
+         * @since 5.4.0
+         */
+        public function jsonSerialize();
+
+    }
+}
