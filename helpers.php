@@ -81,7 +81,7 @@ if (! function_exists('array_first')) {
      * @param  mixed  $default
      * @return mixed
      */
-    function array_first($array, callable $callback = null, $default = null)
+    function array_first($array, $callback = null, $default = null)
     {
         return Arr::first($array, $callback, $default);
     }
@@ -153,7 +153,7 @@ if (! function_exists('array_last')) {
      * @param  mixed  $default
      * @return mixed
      */
-    function array_last($array, callable $callback = null, $default = null)
+    function array_last($array, $callback = null, $default = null)
     {
         return Arr::last($array, $callback, $default);
     }
@@ -271,7 +271,7 @@ if (! function_exists('array_where')) {
      * @param  callable  $callback
      * @return array
      */
-    function array_where($array, callable $callback)
+    function array_where($array, $callback)
     {
         return Arr::where($array, $callback);
     }
@@ -630,7 +630,7 @@ if (! function_exists('retry')) {
      *
      * @throws \Exception
      */
-    function retry($times, callable $callback, $sleep = 0)
+    function retry($times, $callback, $sleep = 0)
     {
         $times--;
 
@@ -896,7 +896,7 @@ if (! function_exists('transform')) {
      * @param  mixed  $default
      * @return mixed|null
      */
-    function transform($value, callable $callback, $default = null)
+    function transform($value, $callback, $default = null)
     {
         if (filled($value)) {
             return $callback($value);
@@ -943,7 +943,7 @@ if (! function_exists('with')) {
      * @param  callable|null  $callback
      * @return mixed
      */
-    function with($value, callable $callback = null)
+    function with($value, $callback = null)
     {
         return is_null($callback) ? $value : $callback($value);
     }

@@ -1609,7 +1609,7 @@ class Arr
      *
      * @return array
      */
-    public static function where($array, callable $callback)
+    public static function where($array, $callback)
     {
         return array_filter($array, $callback, ARRAY_FILTER_USE_BOTH);
     }
@@ -1637,7 +1637,7 @@ class Arr
      *
      * @return mixed
      */
-    public static function first($array, callable $callback = null, $default = null)
+    public static function first($array, $callback = null, $default = null)
     {
         if (is_null($callback)) {
             if (empty($array)) {
@@ -1667,7 +1667,7 @@ class Arr
      *
      * @return mixed
      */
-    public static function last($array, callable $callback = null, $default = null)
+    public static function last($array, $callback = null, $default = null)
     {
         if (is_null($callback)) {
             return empty($array) ? static::value($default) : end($array);

@@ -268,7 +268,7 @@ class Collection implements ArrayAccess, Arrayable, Countable, IteratorAggregate
      *
      * @return $this
      */
-    public function each(callable $callback)
+    public function each($callback)
     {
         foreach ($this->items as $key => $item) {
 
@@ -338,7 +338,7 @@ class Collection implements ArrayAccess, Arrayable, Countable, IteratorAggregate
      *
      * @return static
      */
-    public function filter(callable $callback = null)
+    public function filter($callback = null)
     {
         if ($callback) {
 
@@ -357,7 +357,7 @@ class Collection implements ArrayAccess, Arrayable, Countable, IteratorAggregate
      *
      * @return mixed
      */
-    public function when($value, callable $callback, callable $default = null)
+    public function when($value, $callback, $default = null)
     {
         if ($value) {
 
@@ -485,7 +485,7 @@ class Collection implements ArrayAccess, Arrayable, Countable, IteratorAggregate
      *
      * @return mixed
      */
-    public function first(callable $callback = null, $default = null)
+    public function first($callback = null, $default = null)
     {
         return Arr::first($this->items, $callback, $default);
     }
@@ -706,7 +706,7 @@ class Collection implements ArrayAccess, Arrayable, Countable, IteratorAggregate
      *
      * @return mixed
      */
-    public function last(callable $callback = null, $default = null)
+    public function last($callback = null, $default = null)
     {
         return Arr::last($this->items, $callback, $default);
     }
@@ -731,7 +731,7 @@ class Collection implements ArrayAccess, Arrayable, Countable, IteratorAggregate
      *
      * @return static
      */
-    public function map(callable $callback)
+    public function map($callback)
     {
         $keys = array_keys($this->items);
 
@@ -749,7 +749,7 @@ class Collection implements ArrayAccess, Arrayable, Countable, IteratorAggregate
      *
      * @return static
      */
-    public function mapWithKeys(callable $callback)
+    public function mapWithKeys($callback)
     {
         $result = array();
 
@@ -773,7 +773,7 @@ class Collection implements ArrayAccess, Arrayable, Countable, IteratorAggregate
      *
      * @return static
      */
-    public function flatMap(callable $callback)
+    public function flatMap($callback)
     {
         return $this->map($callback)->collapse();
     }
@@ -948,7 +948,7 @@ class Collection implements ArrayAccess, Arrayable, Countable, IteratorAggregate
      *
      * @return mixed
      */
-    public function pipe(callable $callback)
+    public function pipe($callback)
     {
         return $callback($this);
     }
@@ -1056,7 +1056,7 @@ class Collection implements ArrayAccess, Arrayable, Countable, IteratorAggregate
      *
      * @return mixed
      */
-    public function reduce(callable $callback, $initial = null)
+    public function reduce($callback, $initial = null)
     {
         return array_reduce($this->items, $callback, $initial);
     }
@@ -1220,7 +1220,7 @@ class Collection implements ArrayAccess, Arrayable, Countable, IteratorAggregate
      *
      * @return static
      */
-    public function sort(callable $callback = null)
+    public function sort($callback = null)
     {
         $items = $this->items;
 
@@ -1345,7 +1345,7 @@ class Collection implements ArrayAccess, Arrayable, Countable, IteratorAggregate
      *
      * @return $this
      */
-    public function tap(callable $callback)
+    public function tap($callback)
     {
         $callback(new static($this->items));
 
@@ -1359,7 +1359,7 @@ class Collection implements ArrayAccess, Arrayable, Countable, IteratorAggregate
      *
      * @return $this
      */
-    public function transform(callable $callback)
+    public function transform($callback)
     {
         $this->items = $this->map($callback)->all();
 
@@ -1732,7 +1732,7 @@ class Collection implements ArrayAccess, Arrayable, Countable, IteratorAggregate
      *
      * @return void
      */
-    public static function macro($name, callable $macro)
+    public static function macro($name, $macro)
     {
         static::$macros[$name] = $macro;
     }

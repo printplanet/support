@@ -578,7 +578,7 @@ class Str
      *
      * @return void
      */
-    public static function macro($name, callable $macro)
+    public static function macro($name, $macro)
     {
         static::$macros[$name] = $macro;
     }
