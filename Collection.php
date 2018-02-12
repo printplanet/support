@@ -401,8 +401,14 @@ class Collection implements ArrayAccess, Arrayable, Countable, IteratorAggregate
      *
      * @return \Closure
      */
-    protected function operatorForWhere($key, $operator, $value)
+    protected function operatorForWhere($key, $operator, $value = null)
     {
+        if (func_num_args() == 2) {
+            $value = $operator;
+
+            $operator = '=';
+        }
+
         return function ($item) use ($key, $operator, $value) {
 
             $retrieved = Arr::get($item, $key);
