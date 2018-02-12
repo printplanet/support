@@ -491,6 +491,19 @@ class Collection implements ArrayAccess, Arrayable, Countable, IteratorAggregate
     }
 
     /**
+     * Get the first item by the given key value pair.
+     *
+     * @param  string  $key
+     * @param  mixed  $operator
+     * @param  mixed  $value
+     * @return static
+     */
+    public function firstWhere($key, $operator, $value = null)
+    {
+        return $this->first(call_user_func_array(array($this, "operatorForWhere"), func_get_args()));
+    }
+
+    /**
      * Get a flattened array of the items in the collection.
      *
      * @param  int $depth
